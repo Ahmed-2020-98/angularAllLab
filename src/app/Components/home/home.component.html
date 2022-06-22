@@ -1,0 +1,20 @@
+<!-- name from interface -->
+<!-- <h1>Store Name: {{storeInfo.name}}</h1> -->
+
+<!-- name from class -->
+<h1>##Store Name from class##: {{storeDataClass.name}}</h1>
+<!-- img from interface -->
+<!-- <img src="{{storeInfo.coverImgURL}}" alt=""> -->
+
+<!-- img from class -->
+<img src="{{storeDataClass.imgURL}}" alt="">
+<!-- structural directive -->
+<!-- Loop on branches -->
+<!-- *ngFor of -->
+<ul>
+    <li *ngFor="let loc of storeInfo.branches">
+        {{loc}}
+    </li>
+</ul>
+
+
