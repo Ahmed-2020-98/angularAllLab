@@ -15,12 +15,22 @@ storeInfo:StoreInfo={name:'ITI Store',
                     branches:["Cairo","Qena","Sohag","Smart"]};
   // class property 
 storeDataClass:StoreData;
+  //  flag property 
+  showImg:boolean=true;
+  userFeedback:string="Good";
   constructor() {
     this.storeDataClass=new StoreData('ITI From class',
                                   'https://fakeimg.pl/250x100/',
                                   ["Cairo","Qena","Sohag","Smart"]);
     
    }
+
+
+   toggleImg(){
+
+    this.showImg=!this.showImg;
+   }
+
 
   ngOnInit(): void {
   }

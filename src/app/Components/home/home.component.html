@@ -7,7 +7,14 @@
 <!-- <img src="{{storeInfo.coverImgURL}}" alt=""> -->
 
 <!-- img from class -->
-<img src="{{storeDataClass.imgURL}}" alt="">
+<!-- <img src="{{storeDataClass.imgURL}}" alt=""> -->
+<!-- property binding -->
+<!-- *ngIf => condition -->
+<img *ngIf="showImg" [src]="storeDataClass.imgURL" alt="">
+<!-- event binding => (click)="Func1()" -->
+<br>
+<button class="btn btn-primary" (click)="toggleImg()">Toggle Image</button>
+
 <!-- structural directive -->
 <!-- Loop on branches -->
 <!-- *ngFor of -->
@@ -16,5 +23,15 @@
         {{loc}}
     </li>
 </ul>
+
+<!-- one way binding -->
+<!-- <label for="">Enter your feedback: </label>
+<input type="text" class="form-control" name="userFeedback" id="userFeedback" [value]="userFeedback">
+<h1>{{userFeedback}}</h1> -->
+
+<!-- Two way binding -->
+<label for="">Enter your feedback: </label>
+<input type="text" class="form-control" name="userFeedback" id="userFeedback" [(ngModel)]="userFeedback">
+<h1>{{userFeedback}}</h1>
 
 

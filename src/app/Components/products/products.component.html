@@ -1,0 +1,79 @@
+<!--Hint For lab -->
+<div class="mb-3">
+    <label for="cat">Select Category: </label>
+    <select name="cat" id="cat" class="form-control" [(ngModel)]="selectedCatID">
+        <option *ngFor="let cat of catList" [value]="cat.id">{{cat.name}}</option>
+    </select>
+</div>
+<p>{{selectedCatID}}</p>
+<!-- Date pipe -->
+<!-- <div class="m-3">
+    Test current time: {{todayData | date:'full'}}
+</div> -->
+<table class="table m-2">
+  <thead>
+    <tr class="bg-dark text-light">
+      <th scope="col">No.</th>
+      <th scope="col">Name</th>
+      <th scope="col">Image</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Price in USD</th>
+      <th scope="col">Price in EGY</th>
+      <th scope="col">Buy</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <!-- ngFor -->
+    <!-- index => start from zero -->
+    <!-- <tr *ngFor="let prd of prdList;let i=index" [hidden]="prd.quantity==0"> -->
+    <!-- <tr *ngFor="let prd of prdList;let i=index" [class.bg-warning]="prd.quantity==0"> -->
+    <!-- <tr *ngFor="let prd of prdList;let i=index" [class.bg-warning]="prd.quantity==0" [class.text-danger]="prd.quantity==0"> -->
+    <!-- trackBy -->
+    <!-- <tr *ngFor="let prd of prdList;let i=index;trackBy:trackByFunc" [style.background-color]="(prd.quantity==0)?'lightyellow':'lightblue'"> -->
+    <!-- virual containers in angular -->
+    <!-- ng-container , ng-content , ng-template -->
+
+    <ng-container *ngFor="let prd of prdList;let i=index;trackBy:trackByFunc">
+      <!-- <tr *ngIf="prd.quantity>0"> -->
+        <!-- <tr [ngClass]="{'bg-warning':prd.quantity==0,'text-danger':prd.quantity==0}"> -->
+        <tr [ngStyle]="{'background-color':(prd.quantity==0)?'lightyellow':'lightblue','color':(prd.quantity==0)?'red':'blue'}">
+        <!-- <td>{{prd.id}}</td> -->
+        <td>{{i+1}}</td>
+        <td>{{prd.name | uppercase}}</td>
+        <!-- <td>{{prd.name | lowercase}}</td> -->
+        <!-- <td><img [src]="prd.imgURL" BorderSytle hoverColor="pink"/></td> -->
+        <td><img [src]="prd.imgURL" BorderSytle="brown" BColor="blue"/></td>
+        <!-- <td>{{prd.quantity}}</td> -->
+        <td>
+            <!-- <span *ngIf="prd.quantity>0">{{prd.quantity}}</span>
+            <span *ngIf="prd.quantity==0">Out of stock</span> -->
+
+            <!-- <span *ngIf="prd.quantity>0;else OutOfStockRef">{{prd.quantity}}</span> -->
+            <!-- template reference  -->
+            <!-- <ng-template #OutOfStockRef>Out of stock</ng-template> -->
+
+
+            <!-- <ng-container *ngIf="prd.quantity>0;else OutOfStockRef">{{prd.quantity}}</ng-container>
+            <ng-template #OutOfStockRef>Out of stock</ng-template> -->
+
+            <!-- switch() case 1 case.. default -->
+            <ng-container [ngSwitch]="prd.quantity">
+                <ng-container *ngSwitchCase="0">Out of stock</ng-container>
+                <ng-container *ngSwitchCase="1">Last Item!</ng-container>
+                <ng-container *ngSwitchCase="2">Last 2 Item!</ng-container>
+                <ng-container *ngSwitchDefault>{{prd.quantity}}</ng-container>
+
+            </ng-container>
+
+
+        </td>
+        <!-- <td>{{prd.price | currency:'EGP':'symbol'}}</td> -->
+        <td>{{prd.price | currency:'USD':'symbol'}}</td>
+        <td>{{prd.price | USDtoEGP:20 |currency:'EGP'}}</td>
+        <td><button class="btn btn-success" type="button" [disabled]="prd.quantity==0">Buy</button></td>
+        <!-- <td><button class="btn btn-success" type="button" [hidden]="prd.quantity==0">Buy</button></td> -->
+      </tr>
+    </ng-container>
+  </tbody>
+</table>
