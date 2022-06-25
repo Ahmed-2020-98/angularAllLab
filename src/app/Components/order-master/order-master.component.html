@@ -1,0 +1,24 @@
+<div class="mb-3">
+    <label for="cat">Select Category: </label>
+    <select name="cat" id="cat" class="form-control" [(ngModel)]="selectedCatID">
+        <option value="0">All</option>
+        <option *ngFor="let cat of catList" [value]="cat.id">{{cat.name}}</option>
+    </select>
+</div>
+<div class="bg-info">
+    <h3>For test viewChild => component reference</h3> 
+    <button class="btn btn-warning" (click)="getNewArrOfProduct()">Get Products</button>
+</div>
+<!-- Test viewChild -->
+<div>
+    <label for="userName">Client Name:</label>
+    <input type="text" class="form-control" name="userName" id="userName" #clientName>
+</div>
+
+<!-- <p>{{selectedCatID}}</p> -->
+
+<!-- Child component -->
+<products [receivedCatID]="selectedCatID" (totalPriceChanged)="onTotalPriceChanged($event)"></products>
+<!-- Display result of event -->
+<h2>Total Order Price: {{receivedOrderTotalPrice}} </h2>
+

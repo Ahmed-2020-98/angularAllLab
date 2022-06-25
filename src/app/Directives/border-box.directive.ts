@@ -1,9 +1,9 @@
-import { Directive, ElementRef, HostListener, Input } from '@angular/core';
+import { Directive, ElementRef, HostListener, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 @Directive({
   selector: '[BorderSytle]'
 })
-export class BorderBoxDirective {
+export class BorderBoxDirective implements OnChanges {
 // 
 // private elem:ElementRef;
 // BorderColor:string="green";
@@ -14,8 +14,11 @@ export class BorderBoxDirective {
     // this.elem = _elem
     // elem.nativeElement.style.border=`3px solid red`;
     // elem.nativeElement.style.border=`3px solid ${this.BorderColor}`;
-    elem.nativeElement.style.border=`3px solid ${this.BColor}`;
+    // elem.nativeElement.style.border=`3px solid ${this.BColor}`;
    }
+  ngOnChanges(): void {
+    this.elem.nativeElement.style.border=`3px solid ${this.BColor}`;
+  }
 
   //  @HostListener('event')  functionName(){}
   @HostListener('mouseover') onMouseover(){

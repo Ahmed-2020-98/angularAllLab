@@ -1,11 +1,11 @@
 <!--Hint For lab -->
-<div class="mb-3">
+<!-- <div class="mb-3">
     <label for="cat">Select Category: </label>
     <select name="cat" id="cat" class="form-control" [(ngModel)]="selectedCatID">
         <option *ngFor="let cat of catList" [value]="cat.id">{{cat.name}}</option>
     </select>
 </div>
-<p>{{selectedCatID}}</p>
+<p>{{selectedCatID}}</p> -->
 <!-- Date pipe -->
 <!-- <div class="m-3">
     Test current time: {{todayData | date:'full'}}
@@ -19,6 +19,7 @@
       <th scope="col">Quantity</th>
       <th scope="col">Price in USD</th>
       <th scope="col">Price in EGY</th>
+      <th scope="col">Count</th>
       <th scope="col">Buy</th>
     </tr>
   </thead>
@@ -34,7 +35,9 @@
     <!-- virual containers in angular -->
     <!-- ng-container , ng-content , ng-template -->
 
-    <ng-container *ngFor="let prd of prdList;let i=index;trackBy:trackByFunc">
+    <!-- <ng-container *ngFor="let prd of prdList;let i=index;trackBy:trackByFunc"> -->
+      <!-- Day3  -->
+      <ng-container *ngFor="let prd of prdListOfCat;let i=index;trackBy:trackByFunc">
       <!-- <tr *ngIf="prd.quantity>0"> -->
         <!-- <tr [ngClass]="{'bg-warning':prd.quantity==0,'text-danger':prd.quantity==0}"> -->
         <tr [ngStyle]="{'background-color':(prd.quantity==0)?'lightyellow':'lightblue','color':(prd.quantity==0)?'red':'blue'}">
@@ -71,9 +74,17 @@
         <!-- <td>{{prd.price | currency:'EGP':'symbol'}}</td> -->
         <td>{{prd.price | currency:'USD':'symbol'}}</td>
         <td>{{prd.price | USDtoEGP:20 |currency:'EGP'}}</td>
-        <td><button class="btn btn-success" type="button" [disabled]="prd.quantity==0">Buy</button></td>
+        <!-- Day3=>template reference -->
+        <td><input type="number" class="form-control" #itemsCount></td>
+        <!-- Day3 => add updateTotalPrice on button -->
+        <td><button class="btn btn-success" type="button" [disabled]="prd.quantity==0" (click)="updateTotalPrice(prd.price,itemsCount.value)">Buy</button></td>
         <!-- <td><button class="btn btn-success" type="button" [hidden]="prd.quantity==0">Buy</button></td> -->
       </tr>
     </ng-container>
   </tbody>
 </table>
+
+<!-- Day3 for test updateTotalPrice -->
+<!-- <div class="bg-info">
+<h2> Order total price: {{orderTotalPrice}}</h2>
+</div> -->

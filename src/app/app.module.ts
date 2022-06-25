@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { ProductsComponent } from './Components/products/products.component';
 import { BorderBoxDirective } from './Directives/border-box.directive';
 import { UsdToEgpPipe } from './Pipes/usd-to-egp.pipe';
+import { OrderMasterComponent } from './Components/order-master/order-master.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { UsdToEgpPipe } from './Pipes/usd-to-egp.pipe';
     HomeComponent,
     ProductsComponent,
     BorderBoxDirective,
-    UsdToEgpPipe
+    UsdToEgpPipe,
+    OrderMasterComponent
   ],
   imports: [
     BrowserModule,
