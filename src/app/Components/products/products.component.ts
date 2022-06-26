@@ -1,17 +1,20 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Router } from '@angular/router';
 import { Icategory } from 'src/app/Models/icategory';
 import { Iproduct } from 'src/app/Models/iproduct';
+import { ProductService } from 'src/app/Services/product.service';
 
 @Component({
   selector: 'products',
   templateUrl: './products.component.html',
-  styleUrls: ['./products.component.scss']
+  styleUrls: ['./products.component.scss'],
+  // providers:[ProductService]
 })
 export class ProductsComponent implements OnInit,OnChanges {
   todayData:Date=new Date();
 
   // declare array from Iproduct type
-  prdList:Iproduct[];
+  // prdList:Iproduct[];
   // Day3
   prdListOfCat:Iproduct[]=[];
  @Input() receivedCatID:number = 0;
@@ -20,18 +23,19 @@ export class ProductsComponent implements OnInit,OnChanges {
   // For Lab
   // catList:Icategory[];
   // selectedCatID:number = 0;
-  // intialize , inject
-  constructor() {
+  // intialize , inject service
+  // Day4
+  constructor(private prdServices:ProductService,private router:Router) {
     this.totalPriceChanged=new EventEmitter<number>();
     // intialize array with anonymous objects
-    this.prdList=[
-      {id:1,name: 'Dell',price:12000,quantity:0,imgURL:'https://fakeimg.pl/250x100',catID:1},
-      {id:6,name: 'Lenovo',price:23000,quantity:3,imgURL:'https://fakeimg.pl/250x100',catID:1},
-      {id:11,name: 'LG',price:44000,quantity:2,imgURL:'https://fakeimg.pl/250x100',catID:2},
-      {id:7,name: 'Tornado',price:15200,quantity:1,imgURL:'https://fakeimg.pl/250x100',catID:2},
-      {id:18,name: 'Redmi',price:35000,quantity:0,imgURL:'https://fakeimg.pl/250x100',catID:3},
-      {id:20,name: 'Samsung',price:15800,quantity:6,imgURL:'https://fakeimg.pl/250x100',catID:3},
-    ];
+    // this.prdList=[
+    //   {id:1,name: 'Dell',price:12000,quantity:0,imgURL:'https://fakeimg.pl/250x100',catID:1},
+    //   {id:6,name: 'Lenovo',price:23000,quantity:3,imgURL:'https://fakeimg.pl/250x100',catID:1},
+    //   {id:11,name: 'LG',price:44000,quantity:2,imgURL:'https://fakeimg.pl/250x100',catID:2},
+    //   {id:7,name: 'Tornado',price:15200,quantity:1,imgURL:'https://fakeimg.pl/250x100',catID:2},
+    //   {id:18,name: 'Redmi',price:35000,quantity:0,imgURL:'https://fakeimg.pl/250x100',catID:3},
+    //   {id:20,name: 'Samsung',price:15800,quantity:6,imgURL:'https://fakeimg.pl/250x100',catID:3},
+    // ];
 
     // this.catList=[
     //   {id:1,name: 'LabTop'},
@@ -41,11 +45,16 @@ export class ProductsComponent implements OnInit,OnChanges {
 
    }
   ngOnChanges(): void {
-    this.getProductsOfCat();
+    // this.getProductsOfCat();
+    // Day4
+    this.prdListOfCat=this.prdServices.getProductsByCatID(this.receivedCatID);
     
   }
    ngOnInit(): void {
     // this.getProductsOfCat();
+    // Day4
+    // this.prdListOfCat=this.prdServices.getProductsByCatID(this.receivedCatID);
+
   }
 
   //  item ,index
@@ -54,14 +63,14 @@ export class ProductsComponent implements OnInit,OnChanges {
 
    }
 
-   private getProductsOfCat(){
-    if(this.receivedCatID==0){
-     this.prdListOfCat= Array.from(this.prdList);
-     return;
+  //  private getProductsOfCat(){
+  //   if(this.receivedCatID==0){
+  //    this.prdListOfCat= Array.from(this.prdList);
+  //    return;
 
-    }
-   this.prdListOfCat= this.prdList.filter((prd)=>prd.catID==this.receivedCatID);
-   }
+  //   }
+  //  this.prdListOfCat= this.prdList.filter((prd)=>prd.catID==this.receivedCatID);
+  //  }
    updateTotalPrice(prdPrice:number,itemCount:any){
     // this.orderTotalPrice +=(prdPrice * itemCount);
     // Ways of convert string to number
@@ -76,4 +85,12 @@ export class ProductsComponent implements OnInit,OnChanges {
 
    }
 
+
+
+  //  Day4
+  openProductDetails(prdID:number){
+
+
+    this.router.navigate(['Products',prdID]);
+  }
 }

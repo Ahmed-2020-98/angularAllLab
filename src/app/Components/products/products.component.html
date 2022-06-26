@@ -19,6 +19,7 @@
       <th scope="col">Quantity</th>
       <th scope="col">Price in USD</th>
       <th scope="col">Price in EGY</th>
+      <th scope="col">Details</th>
       <th scope="col">Count</th>
       <th scope="col">Buy</th>
     </tr>
@@ -74,6 +75,8 @@
         <!-- <td>{{prd.price | currency:'EGP':'symbol'}}</td> -->
         <td>{{prd.price | currency:'USD':'symbol'}}</td>
         <td>{{prd.price | USDtoEGP:20 |currency:'EGP'}}</td>
+        <!-- Day4 -->
+        <td><button type="button" class="btn btn-info"(click)="openProductDetails(prd.id)">Details</button></td>
         <!-- Day3=>template reference -->
         <td><input type="number" class="form-control" #itemsCount></td>
         <!-- Day3 => add updateTotalPrice on button -->
