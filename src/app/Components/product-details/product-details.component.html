@@ -5,11 +5,17 @@
     <p class="card-text">Price:{{prd?.price}} </p>
     <p class="card-text">Quantity:{{prd?.quantity}}</p>
   </div>
+  <div class="btn-group">
+    <button class="btn btn-danger" (click)="goPrev()" [disabled]="currentPrdID==prdIDList[0]">Previous</button>
   <button (click)="goBack()" class="btn btn-primary">Back</button>
+  <button class="btn btn-warning" (click)="goNext()" [disabled]="currentPrdID==prdIDList[prdIDList.length-1]">Next</button>
+
+
+  </div>
 </div>
 
 <div>
     <label for="search">Search Product: </label>
     <input type="text" class="form-control" name="search" id="search" #prdInput>
-    <button (click)="searchProduct(prdInput.value)">Search</button>
+    <button (click)="searchProduct(prdInput.value)" class="btn btn-primary">Search</button>
 </div>

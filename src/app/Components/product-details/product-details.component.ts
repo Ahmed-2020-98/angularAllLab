@@ -11,14 +11,50 @@ import { Location } from '@angular/common';
 })
 export class ProductDetailsComponent implements OnInit {
 prd:Iproduct|undefined=undefined;
+currentPrdID:number=0;
+prdIDList:number[]=[];
+currentIndex:number=0;
   constructor(private prdService:ProductService,private router:Router,private activateRoute:ActivatedRoute,private location:Location) { }
 
   ngOnInit(): void {
   //  let sendPrdID=this.activateRoute.snapshot.paramMap.get('pid');
   //  console.log(sendPrdID);
 // ternary operator 
-  let sendPrdID:number=(this.activateRoute.snapshot.paramMap.get('pid'))?Number(this.activateRoute.snapshot.paramMap.get('pid')):0;
-   let foundedPrd=this.prdService.getProductByID(sendPrdID);
+  // let sendPrdID:number=(this.activateRoute.snapshot.paramMap.get('pid'))?Number(this.activateRoute.snapshot.paramMap.get('pid')):0;
+  //  let foundedPrd=this.prdService.getProductByID(sendPrdID);
+
+  //  if(foundedPrd){
+  //   this.prd=foundedPrd;
+  //   console.log(this.prd);
+    
+  //  }
+  //  else{
+  //   alert("Product not found");
+  //   this.location.back();
+  //  }
+  this.prdIDList= this.prdService.getProductsIDList();
+  // console.log(this.prdList);
+//  this.currentIndex= this.prdIDList.findIndex((item)=>item==this.currentPrdID);
+  
+  // this.currentPrdID=(this.activateRoute.snapshot.paramMap.get('pid'))?Number(this.activateRoute.snapshot.paramMap.get('pid')):0;
+  //  let foundedPrd=this.prdService.getProductByID(this.currentPrdID);
+
+  //  if(foundedPrd){
+  //   this.prd=foundedPrd;
+  //   console.log(this.prd);
+    
+  //  }
+  //  else{
+  //   alert("Product not found");
+  //   this.location.back();
+  //  }
+
+  // Last Test case
+  // subscribe => async
+  this.activateRoute.paramMap.subscribe(
+    paramMap=>{
+      this.currentPrdID=(paramMap.get('pid'))?Number(paramMap.get('pid')):0;
+       let foundedPrd=this.prdService.getProductByID(this.currentPrdID);
 
    if(foundedPrd){
     this.prd=foundedPrd;
@@ -29,6 +65,8 @@ prd:Iproduct|undefined=undefined;
     alert("Product not found");
     this.location.back();
    }
+    }
+  )
 
   }
 
@@ -47,5 +85,16 @@ prd:Iproduct|undefined=undefined;
    }
 
   }
+  goPrev(){
+    this.currentIndex= this.prdIDList.findIndex((item)=>item==this.currentPrdID);
+    // array[this.currentIndex]
+    this.router.navigate(['/Products',this.prdIDList[--this.currentIndex]]);
 
+  }
+  goNext(){
+    this.currentIndex= this.prdIDList.findIndex((item)=>item==this.currentPrdID);
+    this.router.navigate(['/Products',this.prdIDList[++this.currentIndex]]);
+
+
+  }
 }

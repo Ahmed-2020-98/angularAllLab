@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Icategory } from 'src/app/Models/icategory';
 import { Iproduct } from 'src/app/Models/iproduct';
 import { ProductService } from 'src/app/Services/product.service';
+import { ProductsApiService } from 'src/app/Services/products-api.service';
 
 @Component({
   selector: 'products',
@@ -25,7 +26,9 @@ export class ProductsComponent implements OnInit,OnChanges {
   // selectedCatID:number = 0;
   // intialize , inject service
   // Day4
-  constructor(private prdServices:ProductService,private router:Router) {
+  constructor(private prdServices:ProductService,
+            private router:Router
+            ,private prdAPIservice:ProductsApiService) {
     this.totalPriceChanged=new EventEmitter<number>();
     // intialize array with anonymous objects
     // this.prdList=[
@@ -47,13 +50,21 @@ export class ProductsComponent implements OnInit,OnChanges {
   ngOnChanges(): void {
     // this.getProductsOfCat();
     // Day4
-    this.prdListOfCat=this.prdServices.getProductsByCatID(this.receivedCatID);
+    // this.prdListOfCat=this.prdServices.getProductsByCatID(this.receivedCatID);
+    // Day5
+    this.prdAPIservice.getProductsByCatID(this.receivedCatID).subscribe(data=>{
+      this.prdListOfCat=data;
+    });
     
   }
    ngOnInit(): void {
     // this.getProductsOfCat();
     // Day4
     // this.prdListOfCat=this.prdServices.getProductsByCatID(this.receivedCatID);
+    // Day5
+    this.prdAPIservice.getAllProducts().subscribe(prdList=>{
+      this.prdListOfCat=prdList;
+    })
 
   }
 

@@ -40,4 +40,15 @@ export class ProductService {
   searchProductByName(prdName:string):Iproduct|undefined{
     return this.prdList.find(prd=>prd.name==prdName);
   }
+
+
+  getProductsIDList():number[]{
+    return this.prdList.map(prd=>prd.id)
+  }
+
+
+  // Hint for lab assignment
+addProduct(prd:Iproduct){
+  this.prdList.push(prd);
+}
 }
