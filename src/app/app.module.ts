@@ -6,7 +6,7 @@ import { HeaderComponent } from './Components/header/header.component';
 import { FooterComponent } from './Components/footer/footer.component';
 import { SidebarComponent } from './Components/sidebar/sidebar.component';
 import { HomeComponent } from './Components/home/home.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductsComponent } from './Components/products/products.component';
 import { BorderBoxDirective } from './Directives/border-box.directive';
 import { UsdToEgpPipe } from './Pipes/usd-to-egp.pipe';
@@ -15,6 +15,8 @@ import { NotFoundPageComponent } from './Components/not-found-page/not-found-pag
 import { MainLayoutComponent } from './Components/main-layout/main-layout.component';
 import { ProductDetailsComponent } from './Components/product-details/product-details.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AddProductComponent } from './Components/Admin/add-product/add-product.component';
+import { RegisterUserComponent } from './Components/register-user/register-user.component';
 
 @NgModule({
   declarations: [
@@ -29,12 +31,15 @@ import { HttpClientModule } from '@angular/common/http';
     OrderMasterComponent,
     NotFoundPageComponent,
     MainLayoutComponent,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    AddProductComponent,
+    RegisterUserComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule
   ],
   providers: [],

@@ -1,0 +1,50 @@
+<!-- First test case -->
+<!-- <button class="btn btn-primary" (click)="InsertNewProduct()">Submit</button> -->
+
+<form #prdForm="ngForm" (ngSubmit)="InsertNewProduct()">
+  <div class="mb-3">
+    <label for="prdName" class="form-label">Product Name</label>
+
+    <input type="text" #prdNameInput="ngModel" class="form-control" name="prdName" id="prdName" [(ngModel)]="newPrd.name" required pattern="[A-Za-z]{3,10}" [class.is-valid]="prdNameInput.valid" [class.is-invalid]="prdNameInput.invalid">
+    <!-- <div class="alert alert-danger" [hidden]="prdNameInput.valid">Name is required and must be three letters at least</div> -->
+    <!-- <div class="alert alert-danger" [hidden]="prdNameInput.valid || prdNameInput.untouched">Name is required and must be three letters at least</div> -->
+    <div class="alert alert-danger" [hidden]="prdNameInput.valid || prdNameInput.untouched">
+        <small *ngIf="prdNameInput.errors?.['required']">
+            Product Name is required
+        </small>
+        <small *ngIf="prdNameInput.errors?.['pattern']">
+            Product Name must be 3 letters at least
+        </small>
+    </div>
+
+  </div>
+
+
+  <div class="mb-3">
+    <label for="prdQuant" class="form-label">Quantity</label>
+    <input type="number" class="form-control" name="prdQuant" id="prdQuant" required [(ngModel)]="newPrd.quantity">
+  </div>
+
+  <div class="mb-3">
+    <label for="prdPrc" class="form-label">Price</label>
+    <input type="number" class="form-control" name="prdPrc" id="prdPrc" required [(ngModel)]="newPrd.price">
+  </div>
+
+  <div class="mb-3">
+    <label for="prdCat" class="form-label">Select Category</label>
+    <select class="form-control" name="prdCat" id="prdCat" required [(ngModel)]="newPrd.catID">
+      <option *ngFor="let cat of catList" [value]="cat.id">
+        {{cat.name}}
+      </option>
+    </select>
+  </div>
+
+
+  <button type="submit" class="btn btn-success" [disabled]="prdForm.invalid">Submit</button>
+</form>
+
+<div class="bg-warning">
+    <!-- For test : {{newPrd | json}} -->
+  <!-- <h1>  for test classes: {{prdNameInput.className | json}} </h1> -->
+  <h1>For test input errors: {{prdNameInput.errors | json}}</h1>
+</div>
