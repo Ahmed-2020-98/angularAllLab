@@ -19,6 +19,18 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/register" routerLinkActive="active">Register</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/Login" routerLinkActive="active" [hidden]="isuserLogged">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/Logout" routerLinkActive="active" [hidden]="!isuserLogged">Logout</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/User/UserProfile" routerLinkActive="active" [hidden]="!isuserLogged">Edit profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/User/editprofile" routerLinkActive="active" [hidden]="!isuserLogged">User Profile</a>
+        </li>
       </ul>
     </div>
   </div>

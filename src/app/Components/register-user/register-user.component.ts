@@ -32,6 +32,8 @@ usrFormGroup: FormGroup;
       city:[''],
       street:['']
     }),
+    referral:[''],
+    referralOther:[''],
     password:['']
 
     })
@@ -46,8 +48,24 @@ usrFormGroup: FormGroup;
   get mobileNo(){
     return this.usrFormGroup.get('mobileNo') as FormArray;
   }
+
+
+  get referral(){
+    return this.usrFormGroup.get('referral');
+  }
   addMobile(){
     this.mobileNo.push(this.fb.control(''));
+  }
+
+  updateReferralValidation(){
+    if(this.referral?.value=='other'){
+      this.usrFormGroup.get('referralOther')?.addValidators([Validators.required]);
+
+    }
+    else{ 
+      this.usrFormGroup.get('referralOther')?.clearValidators();
+    }
+    this.usrFormGroup.get('referralOther')?.updateValueAndValidity();
   }
   ngOnInit(): void {
   }

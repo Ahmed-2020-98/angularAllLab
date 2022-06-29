@@ -8,6 +8,8 @@ import { OrderMasterComponent } from './Components/order-master/order-master.com
 import { ProductDetailsComponent } from './Components/product-details/product-details.component';
 import { ProductsComponent } from './Components/products/products.component';
 import { RegisterUserComponent } from './Components/register-user/register-user.component';
+import { UserLoginComponent } from './Components/user-login/user-login.component';
+import { AuthGuard } from './Guards/auth.guard';
 
 // const routes: Routes = [
 //   // First match wins
@@ -28,11 +30,17 @@ const routes: Routes = [
   {path:'Home',component:HomeComponent},
   {path:'Products',component:ProductsComponent},
   {path:'Products/:pid',component:ProductDetailsComponent},
-  {path:'Order',component:OrderMasterComponent},
+  {path:'Order',component:OrderMasterComponent,canActivate:[AuthGuard]},
   {path:'NewProduct',component:AddProductComponent},
   {path:'EditProduct/:pid',component:AddProductComponent},
+  {
+    path: 'User', 
+    loadChildren: () => import('src/app/Components/user/user.module').then(m => m.UserModule)
+  },
  ]},
  {path:'register',component:RegisterUserComponent},
+ {path:'Login',component:UserLoginComponent},
+ {path:'Logout',component:UserLoginComponent},
  {path:'**',component:NotFoundPageComponent}, // wildcard path
 ];
 

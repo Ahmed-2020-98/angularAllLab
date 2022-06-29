@@ -17,6 +17,9 @@ import { ProductDetailsComponent } from './Components/product-details/product-de
 import { HttpClientModule } from '@angular/common/http';
 import { AddProductComponent } from './Components/Admin/add-product/add-product.component';
 import { RegisterUserComponent } from './Components/register-user/register-user.component';
+import { UserLoginComponent } from './Components/user-login/user-login.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -33,14 +36,18 @@ import { RegisterUserComponent } from './Components/register-user/register-user.
     MainLayoutComponent,
     ProductDetailsComponent,
     AddProductComponent,
-    RegisterUserComponent
+    RegisterUserComponent,
+    UserLoginComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

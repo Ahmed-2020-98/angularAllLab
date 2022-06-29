@@ -72,17 +72,23 @@
       <input type="password"  class="form-control" name="usrRePass" id="usrRePass">
     </div>
   
-   <!-- <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+   <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
       <input type="radio" class="btn-check" formControlName="referral" name="referral" id="btnradio1" autocomplete="off"
-        value="SocialMedia">
+        value="SocialMedia" (change)="updateReferralValidation()">
       <label class="btn btn-outline-primary" for="btnradio1">Social media</label>
       <input type="radio" class="btn-check" formControlName="referral" name="referral" id="btnradio2" autocomplete="off"
-        value="Friend" >
+        value="Friend" (change)="updateReferralValidation()">
       <label class="btn btn-outline-primary" for="btnradio2">from a Friend</label>
       <input type="radio" class="btn-check" formControlName="referral" name="referral" id="btnradio3" autocomplete="off"
-        value="other"  >
+        value="other" (change)="updateReferralValidation()" >
       <label class="btn btn-outline-primary" for="btnradio3">other</label>
-    </div> -->
+    </div>
+
+    <div class="mb-3" *ngIf="referral?.value =='other'">
+      <label for="">specify other: </label>
+      <input type="text" class="form-control" name="referralOther" id="referralOther" formControlName="referralOther">
+
+    </div>
   
   
   <br>
